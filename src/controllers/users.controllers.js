@@ -10,6 +10,7 @@ module.exports = {
     //para criar o primeiro cadastro
     //defino como async para a função esperar criar o usuário antes de passsar o status
     async create(req, res){
+        console.log(req.body);
         const {user_name, user_email, user_type, user_password} = req.body;
 
         let data = {};
