@@ -121,7 +121,7 @@ export default function UsersList() {
                                 <TableCell align="center">{new Date(row.createdAt).toLocaleString('pt-br')}</TableCell>
                                 <TableCell align="right">
                                   <ButtonGroup variant="contained" aria-label="outlined button group">
-                                    <Button color='primary' component={Link} to={'/admin/usuarios/editUsers/'+row._id}>Atualizar</Button>
+                                    <Button color='primary'component={Link} to={'/admin/users/editUsers/'+row._id}>Atualizar</Button>
                                     <Button color='secondary' onClick={() => handleDelete(row._id)}>Excluir</Button>
                                   </ButtonGroup>
                                 </TableCell>
