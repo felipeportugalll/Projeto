@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt'); //biblioteca para criptografia
 const dataSchema = new mongoose.Schema({
     //Definindo os campos da collection
-    user_name:String,
-    user_email:String,
+    user_name:{type: String, require:true, unique:true},
+    user_email:{type: String},
     user_type:{type:Number, default:1},
-    user_password:String,
-},{
+    user_password:{type: String, require:true}
+},
+{
     //para data de criação do usuário e sua possível atualização
     timestamps:true
 });
@@ -29,6 +30,25 @@ dataSchema.pre('findOneAndUpdate', function(next){
     next();
 });
 
+dataSchema.methods.comparePassword = function(candidatePassword, callback) {
+    bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+      if (err) {
+        return callback(err);
+      }
+      callback(null, isMatch);
+    });
+  };
+
+// dataSchema.methods.isCorrectPassword = function(password, callback){
+//     bcrypt.compare(password, this.user_password, function(err,same){
+//         if(err){
+//             callback(err);
+//         }else{
+//             callback(err, same);
+//         }
+//     });
+// }
+
 //para exportar a module
-const users = mongoose.model('users', dataSchema);
-module.exports = users;
+const Users = mongoose.model('users', dataSchema);
+module.exports = Users;

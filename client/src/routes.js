@@ -11,10 +11,13 @@ import RegisterCourses from './pages/admin/courses/registerCourses';
 import Users from './pages/admin/users';
 import EditUsers from './pages/admin/users/editUsers';
 import RegisterUsers from './pages/admin/users/registerUsers';
+import Login from './pages/admin/login';
 
 //Imports Client
 import Home from './pages/client/home';
 import CoursesDetails from './pages/client/show-courses/coursesDetails';
+
+//import PrivateRoute from './services/wAuth';
 
 //Function para as rotas
 export default function RouteClient(){
@@ -26,7 +29,9 @@ export default function RouteClient(){
                 <Route path="/show-courses/:idCourse" exact element={<CoursesDetails/>} />
 
                 {/*Rota Admin*/}
+                <Route path="/admin/login" exact element={<Login/>} />
                 <Route path="/admin" exact element={<Dashboard/>} />
+                
 
                 <Route path="/admin/courses" exact element={<Courses/>} />
                 <Route path="/admin/courses/editCourses/:idCourse" exact element={<EditCourses/>} />

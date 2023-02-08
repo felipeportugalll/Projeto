@@ -17,6 +17,9 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Footer from '../../../components/adminMenu/footerAdminMenu';
 import AdminMenu from '../../../components/adminMenu/adminMenu';
 import api from '../../../services/api';
+import { getUserType, getUserTypeLabel } from '../../../functions/staticData'; 
+import { Link } from 'react-router-dom';
+
 
 
 const mdTheme = createTheme();
@@ -47,7 +50,7 @@ export default function UsersList() {
   useEffect(() =>{
 
     async function loadUsers(){
-      const response = await api.get("/api/users");
+      const response = await api.get("http://localhost:5000/api/users");
       setUsers(response.data); 
     }
     loadUsers();
@@ -55,7 +58,7 @@ export default function UsersList() {
 
   async function handleDelete(id){
     if(window.confirm("Deseja realmente excluir este usuário?")){
-      const result = await api.delete('/api/users/'+id);
+      const result = await api.delete('http://localhost:5000/api/users/'+id);
       if(result.status ===200){
         window.location.href = '/admin/users';
       }else{
@@ -114,11 +117,11 @@ export default function UsersList() {
                                   {row.user_name}
                                 </TableCell>
                                 <TableCell align="center">{row.user_email}</TableCell>
-                                <TableCell align="center">{row.user_type===1?<Chip label="Administrador" color='primary'/>:<Chip label="Funcionário" color='secondary'/>}</TableCell>
-                                <TableCell align="center">{new Date(row.createdAt).toLocateString('pt-br')}</TableCell>
+                                <TableCell align="center"><Chip label={getUserType(row.user_type)} color={getUserTypeLabel(row.user_type)}/></TableCell>
+                                <TableCell align="center">{new Date(row.createdAt).toLocaleString('pt-br')}</TableCell>
                                 <TableCell align="right">
                                   <ButtonGroup variant="contained" aria-label="outlined button group">
-                                    <Button color='primary' href={'/admin/usuarios/editUsers/:idUser'+row._id}>Atualizar</Button>
+                                    <Button color='primary' component={Link} to={'/admin/usuarios/editUsers/'+row._id}>Atualizar</Button>
                                     <Button color='secondary' onClick={() => handleDelete(row._id)}>Excluir</Button>
                                   </ButtonGroup>
                                 </TableCell>

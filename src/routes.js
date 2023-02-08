@@ -14,6 +14,7 @@ routes.get('/api/users.details/:_id', Usuario.details);
 routes.delete('/api/users/:_id', Usuario.delete);
 routes.put('/api/users', Usuario.update);
 routes.post('/api/users/login', Usuario.login); 
-
+routes.get('/api/users/checktoken', Usuario.checkToken); 
+routes.get('/api/users/destroytoken', Usuario.destroyToken); 
 
 module.exports = routes;

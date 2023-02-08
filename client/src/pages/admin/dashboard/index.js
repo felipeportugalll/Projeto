@@ -4,11 +4,25 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import ImgAdmin from '../../../assets/img/bgAdmin.jpg';
 import Footer from '../../../components/adminMenu/footerAdminMenu';
 import AdminMenu from '../../../components/adminMenu/adminMenu';
+import { getUserType } from '../../../services/auth';
+
+import DashAdmin from './Admin';
+import DashFuncionario from './Funcionario';
+import DashAluno from './Aluno';
 
 const mdTheme = createTheme();
+
+function getDashboard(){
+  if(getUserType()==='1'){
+    return <DashAdmin/>
+  }else if(getUserType()==='2'){
+    return <DashFuncionario/>
+  }else{
+    return <DashAluno/>
+  }
+};
 
 export default function Dashboard() {
   return (
@@ -30,7 +44,7 @@ export default function Dashboard() {
           <Toolbar />
           <Container maxWidth="sm" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              <img alt='background' src={ImgAdmin}/>
+              {getDashboard()}
             </Grid>
             <Footer sx={{ pt: 4 }} />
           </Container>
