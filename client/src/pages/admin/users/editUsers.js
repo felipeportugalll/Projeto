@@ -29,7 +29,7 @@ export default function RegisterUsers() {
 
   useEffect(() => {
     async function getUser(){
-      const response = await api.get('/api/usuarios.details/'+idUser);
+      const response = await api.get('http://localhost:5000/api/user.details/'+idUser);
       
       setName(response.data.user_name);
       setEmail(response.data.user_email);
@@ -37,7 +37,8 @@ export default function RegisterUsers() {
       setType(response.data.user_type);
     }
     getUser();
-  },);
+  },
+    );
 
 
   async function handleSubmit(event){
@@ -52,7 +53,7 @@ export default function RegisterUsers() {
     
     //chamando a api com axios para criar e armazenar o user 
     if(name!==''&&email!==''&&password!==''&&type!==''){
-      const response = await api.put('/api/users',data);
+      const response = await api.put('http://localhost:5000/api/users',data);
     
     if(response.status===200){
       window.location.href='/admin/users'
@@ -124,7 +125,7 @@ export default function RegisterUsers() {
                   <TextField
                     type="password"
                     required
-                    id="senha"s
+                    id="senha"
                     name="senha"
                     label="Senha"
                     fullWidth
@@ -146,6 +147,7 @@ export default function RegisterUsers() {
                     >
                       <MenuItem value={1}>Administrador</MenuItem>
                       <MenuItem value={2}>Funcionário</MenuItem>
+                      <MenuItem value={3}>Aluno</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>

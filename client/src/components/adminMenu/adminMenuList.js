@@ -7,6 +7,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import SchoolIcon from '@mui/icons-material/School';
 import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { getToken, logout } from '../../services/auth';
+import api from '../../services/api';
 
 export const mainListItems = (
   <React.Fragment>
@@ -34,11 +36,23 @@ export const mainListItems = (
 export const secondaryListItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>Configurações</ListSubheader>
-    <ListItemButton>
+    <ListItemButton onClick={confirmSair}>
       <ListItemIcon>
         <LogoutIcon />
       </ListItemIcon>
       <ListItemText primary="Sair" />
     </ListItemButton>
   </React.Fragment>
-);
+); 
+
+async function confirmSair(){
+  if(window.confirm("Deseja realmente sair?")){
+    const response = await api.get("/api/users/destroytoken", {headers:{token: getToken()}});
+    if(response.status===200){
+      logout();
+      window.location.href = '/login'
+    }else{
+      alert("Não foi possível fazer o logout!");
+    }
+  }
+}

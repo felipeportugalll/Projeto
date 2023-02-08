@@ -36,12 +36,12 @@ export default function RegisterUsers() {
     
     //chamando a api com axios para criar e armazenar o user 
     if(name!==''&&email!==''&&password!==''&&type!==''){
-      const response = await api.post('/api/users',data);
+      const response = await api.post('http://localhost:5000/api/users',data);
     
     if(response.status===200){
       window.location.href='/admin/users'
     }else{
-      alert('Erro ao cadastrar o usuários!')
+      alert('Erro ao cadastrar o usuário!')
     }
   }else{
     alert('Preencha todos os dados!');
@@ -130,6 +130,7 @@ export default function RegisterUsers() {
                     >
                       <MenuItem value={1}>Administrador</MenuItem>
                       <MenuItem value={2}>Funcionário</MenuItem>
+                      <MenuItem value={3}>Aluno</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>

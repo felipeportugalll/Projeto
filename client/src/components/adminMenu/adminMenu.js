@@ -11,6 +11,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
 import MuiAppBar from '@mui/material/AppBar';
+import { getUserName } from '../../services/auth';
+import LogoEiche from '../../assets/img/LogoEiche.jpg';
 
 const drawerWidth = 240;
 
@@ -95,6 +97,7 @@ export default function AdminMenu({title}){
             >
                 {title}
             </Typography>
+            {getUserName()}
         </Toolbar>
     </AppBar>
     
@@ -107,6 +110,7 @@ export default function AdminMenu({title}){
               px: [1],
             }}
           >
+            <img style={{width:150,height:50}} src={LogoEiche} alt="logo sistema"/>
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>
